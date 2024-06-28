@@ -10,9 +10,12 @@ const TestPanel = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
-    <div className="flex h-1/2 flex-col border-b-[1px] border-gray-300 p-4">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center space-x-2 font-semibold text-gray-600">
+    <div className="flex h-1/2 flex-col border-b-[1px] border-gray-300">
+      <div
+        className="flex items-center justify-between
+        border-b-[1px] border-gray-300 p-4"
+      >
+        <div className="flex items-center space-x-2 font-semibold text-blue-600">
           <RiTestTubeFill />
           <span>Test ({selectedTestData.length})</span>
         </div>
@@ -21,7 +24,7 @@ const TestPanel = () => {
           disabled={!selectedGesture}
         />
       </div>
-      <div className="scroll-hidden h-full space-y-3 overflow-scroll">
+      <div className="scroll-hidden flex flex-col space-y-3 overflow-scroll p-4">
         {selectedTestData.map((id) => (
           <DataSampleEntry key={id} id={id} type="test" />
         ))}

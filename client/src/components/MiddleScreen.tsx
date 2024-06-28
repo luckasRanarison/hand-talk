@@ -36,9 +36,7 @@ const MiddleScreen = () => {
           justify-center space-y-4"
         >
           <RiStackFill className="text-gray-600" size={50} />
-          <div className="text-xl text-gray-600">
-            Select a sample to get started
-          </div>
+          <div className="text-xl text-gray-600">No sample selected</div>
         </div>
       )}
     </div>

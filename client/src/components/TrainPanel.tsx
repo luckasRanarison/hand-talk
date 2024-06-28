@@ -10,8 +10,11 @@ const TrainPanel = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
-    <div className="flex flex-col h-1/2 border-b-[1px] border-gray-300 p-4 pb-0">
-      <div className="pb-4 flex items-center justify-between">
+    <div className="flex h-1/2 flex-col border-b-[1px] border-gray-300">
+      <div
+        className="flex items-center justify-between
+        border-b-[1px] border-gray-300 p-4"
+      >
         <div className="flex items-center space-x-2 font-semibold text-green-500">
           <RiRobot2Fill />
           <span>Train ({selectedTrainData.length})</span>
@@ -21,7 +24,7 @@ const TrainPanel = () => {
           disabled={!selectedGesture}
         />
       </div>
-      <div className="h-full space-y-3 overflow-scroll scroll-hidden">
+      <div className="scroll-hidden h-full space-y-3 overflow-scroll p-4">
         {selectedTrainData.map((id) => (
           <DataSampleEntry key={id} id={id} type="train" />
         ))}

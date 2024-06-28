@@ -6,9 +6,9 @@ const GestureEntry = (props: { name: string }) => {
 
   return (
     <div
-      className={`flex cursor-pointer items-center
-      justify-between py-3 px-3 border-[1px] rounded-md
-      hover:bg-gray-200 hover:border-blue-600 hover:text-blue-600
+      className={`flex cursor-pointer items-center justify-between
+      space-x-2 rounded-md border-[1px] px-4 py-3 text-slate-800
+      hover:border-blue-600 hover:bg-gray-200 hover:text-blue-600
       ${selectedGesture == props.name ? "border-blue-600" : "border-gray-300"}`}
       onClick={() => setSelectedGesture(props.name)}
     >
@@ -18,9 +18,7 @@ const GestureEntry = (props: { name: string }) => {
       >
         {props.name}
       </span>
-      <div>
-        <DeleteButton onClick={() => deleteGesture(props.name)} />
-      </div>
+      <DeleteButton onClick={() => deleteGesture(props.name)} />
     </div>
   );
 };

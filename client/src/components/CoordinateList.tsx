@@ -1,8 +1,8 @@
 const CoordinateList = (props: { value: number[] }) =>
   props.value.every((value) => value == 0) ? (
     <div
-      className="w-fit rounded-md bg-red-200 px-4 py-2
-      font-semibold text-red-500"
+      className="w-fit rounded-md border-[1px] border-red-500 px-4 py-2
+      text-red-500"
     >
       Not detected
     </div>
@@ -12,7 +12,7 @@ const CoordinateList = (props: { value: number[] }) =>
         <div
           key={index}
           className="flex overflow-ellipsis rounded-md 
-            bg-blue-100 px-4 py-3
+            border-[1px] border-gray-300 px-4 py-3
             text-sm font-semibold text-slate-700"
         >
           {value}

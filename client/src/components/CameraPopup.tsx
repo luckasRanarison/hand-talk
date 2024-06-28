@@ -20,7 +20,7 @@ const CameraPopup = ({ type, onClose }: Props) => {
   const { selectedGesture, submitImage } = useEditor();
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useMemo(createCanvas, []);
-  const ctx = useMemo(() => canvas.getContext("2d")!, []);
+  const ctx = useMemo(() => canvas.getContext("2d")!, [canvas]);
   const [delay, setDelay] = useState(0);
   const [countdown, setCountdown] = useState(0);
   const [intervalId, setIntervalId] = useState<number>();
@@ -69,7 +69,7 @@ const CameraPopup = ({ type, onClose }: Props) => {
     }, 1000);
 
     setIntervalId(id);
-  }, [countdown]);
+  }, [countdown, intervalId]);
 
   return (
     <Popup>

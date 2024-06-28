@@ -23,27 +23,27 @@ const InputPopup = (props: { onClose: () => void }) => {
         <input
           type="text"
           placeholder="Gesture name..."
-          className="rounded-md border-[1px] border-gray-300 px-4 py-2
-          focus:outline-none"
           value={input}
+          autoFocus
           maxLength={40}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.code == "Enter" && submitGesture()}
+          className="rounded-md border-[1px] border-gray-300 px-4 py-2
+          focus:outline-none"
         />
         <div className="grid grid-cols-2 gap-x-4">
           <button
             onClick={props.onClose}
             className="rounded-md border-[1px]
-            bg-red-300 p-2 text-red-500 font-semibold
-            hover:bg-red-500 hover:text-white"
+            border-red-600 p-2 text-red-600"
           >
             Cancel
           </button>
           <button
             onClick={submitGesture}
             className="rounded-md border-[1px]
-            bg-blue-300 p-2 text-blue-800 font-semibold
-            hover:bg-blue-600 hover:text-white
-            disabled:bg-gray-300 disabled:text-gray-600"
+            border-blue-600 p-2 text-blue-800
+            disabled:border-gray-600 disabled:text-gray-600"
             disabled={!input.length || gestures.includes(input)}
           >
             Add
