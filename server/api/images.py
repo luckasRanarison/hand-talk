@@ -1,13 +1,13 @@
-from io import BytesIO
 import os
 import cv2
 import uuid
-from fastapi.responses import StreamingResponse
 import numpy as np
 import aiofiles as aio
 
+from io import BytesIO
 from utils.fs import persist_data, DB_PATH
 from fastapi import APIRouter, File, Form, UploadFile, HTTPException
+from fastapi.responses import StreamingResponse
 from lib import holistic
 
 
