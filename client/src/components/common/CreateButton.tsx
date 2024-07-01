@@ -9,8 +9,8 @@ const CreateButton = ({ onClick, disabled }: Props) => (
   <button
     disabled={disabled}
     onClick={onClick}
-    className="rounded-md text-blue-600
-    disabled:text-gray-600 dark:text-blue-400"
+    className="rounded-md text-blue-600 disabled:text-gray-600
+    dark:text-blue-400 dark:disabled:text-gray-600"
   >
     <RiAddLine size={20} />
   </button>

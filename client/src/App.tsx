@@ -5,19 +5,17 @@ import Trainer from "./components/trainer/Trainer";
 import Detector from "./components/detector/Detector";
 import MainLayout from "./components/layout/MainLayout";
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/editor" element={<Editor />} />
-          <Route path="/trainer" element={<Trainer />} />
-          <Route path="/detector" element={<Detector />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/trainer" element={<Trainer />} />
+        <Route path="/detector" element={<Detector />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

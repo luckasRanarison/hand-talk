@@ -79,11 +79,12 @@ const CameraPopup = ({ type, onClose }: Props) => {
         overflow-hidden rounded-md"
       >
         <video
+          autoPlay
           ref={video}
           className="scale-x-[-1]"
           disablePictureInPicture={true}
           controls={false}
-          autoPlay
+          onKeyDown={(e) => e.code == "Enter" && captureFrame()}
         />
 
         <div

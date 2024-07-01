@@ -3,7 +3,7 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
 import CreateButton from "../../common/CreateButton";
 import CameraPopup from "../camera/CameraPopup";
-import DataSampleEntry from "./DataSampleEntry";
+import SampleEntry from "./SampleEntry";
 
 const TrainPanel = () => {
   const { selectedGesture, selectedTrainData } = useEditor();
@@ -29,7 +29,7 @@ const TrainPanel = () => {
       </div>
       <div className="scroll-hidden h-full space-y-3 overflow-scroll p-4">
         {selectedTrainData.map((id) => (
-          <DataSampleEntry key={id} id={id} type="train" />
+          <SampleEntry key={id} id={id} type="train" />
         ))}
       </div>
       {showPopup && (
