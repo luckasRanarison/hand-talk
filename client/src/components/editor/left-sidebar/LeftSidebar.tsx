@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { RiDatabase2Fill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
 import CreateButton from "@/components/common/CreateButton";
-import GestureEntry from "./GestureEntry";
 import InputPopup from "./InputPopup";
+import SelectableEntry from "@/components/common/SelectableEntry";
 
 const LeftSidebar = () => {
-  const { gestures, fetchGestures } = useEditor();
+  const {
+    gestures,
+    selectedGesture,
+    fetchGestures,
+    setSelectedGesture,
+    deleteGesture,
+  } = useEditor();
   const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
@@ -27,7 +33,14 @@ const LeftSidebar = () => {
       </div>
       <div className="scroll-hidden flex flex-col space-y-3 overflow-scroll p-4">
         {gestures.map((name) => (
-          <GestureEntry key={name} name={name} />
+          <SelectableEntry
+            key={name}
+            selected={selectedGesture == name}
+            onSelect={() => setSelectedGesture(name)}
+            onDelete={() => deleteGesture(name)}
+          >
+            {name}
+          </SelectableEntry>
         ))}
       </div>
       {showInput && <InputPopup onClose={() => setShowInput(false)} />}

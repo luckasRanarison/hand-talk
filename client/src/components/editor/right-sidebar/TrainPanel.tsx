@@ -3,10 +3,16 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
 import CreateButton from "../../common/CreateButton";
 import CameraPopup from "../camera/CameraPopup";
-import SampleEntry from "./SampleEntry";
+import SelectableEntry from "@/components/common/SelectableEntry";
 
 const TrainPanel = () => {
-  const { selectedGesture, selectedTrainData } = useEditor();
+  const {
+    selectedGesture,
+    selectedSample,
+    selectedTrainData,
+    setSelectedSample,
+    deleteData,
+  } = useEditor();
   const [showPopup, setShowPopup] = useState(false);
 
   return (
@@ -29,7 +35,14 @@ const TrainPanel = () => {
       </div>
       <div className="scroll-hidden h-full space-y-3 overflow-scroll p-4">
         {selectedTrainData.map((id) => (
-          <SampleEntry key={id} id={id} type="train" />
+          <SelectableEntry
+            key={id}
+            selected={selectedSample?.id == id}
+            onSelect={() => setSelectedSample({ id, type: "train" })}
+            onDelete={() => deleteData("train", id)}
+          >
+            {id}
+          </SelectableEntry>
         ))}
       </div>
       {showPopup && (

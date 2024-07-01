@@ -9,7 +9,7 @@ type Context = {
   selectedTestData: string[];
   selectedTrainData: string[];
   setSelectedGesture: (name: string) => void;
-  setSelectedSample: (data?: SampleMetadata) => void;
+  setSelectedSample: (data: SampleMetadata) => void;
   fetchGestures: () => Promise<void>;
   createGesture: (name: string) => Promise<void>;
   deleteGesture: (name: string) => Promise<void>;

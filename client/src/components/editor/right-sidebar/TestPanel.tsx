@@ -3,10 +3,16 @@ import { RiTestTubeFill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
 import CreateButton from "../../common/CreateButton";
 import CameraPopup from "../camera/CameraPopup";
-import SampleEntry from "./SampleEntry";
+import SelectableEntry from "@/components/common/SelectableEntry";
 
 const TestPanel = () => {
-  const { selectedGesture, selectedTestData } = useEditor();
+  const {
+    selectedGesture,
+    selectedSample,
+    selectedTestData,
+    setSelectedSample,
+    deleteData,
+  } = useEditor();
   const [showPopup, setShowPopup] = useState(false);
 
   return (
@@ -29,7 +35,14 @@ const TestPanel = () => {
       </div>
       <div className="scroll-hidden flex flex-col space-y-3 overflow-scroll p-4">
         {selectedTestData.map((id) => (
-          <SampleEntry key={id} id={id} type="test" />
+          <SelectableEntry
+            key={id}
+            selected={selectedSample?.id == id}
+            onSelect={() => setSelectedSample({ id, type: "test" })}
+            onDelete={() => deleteData("test", id)}
+          >
+            {id}
+          </SelectableEntry>
         ))}
       </div>
       {showPopup && (
