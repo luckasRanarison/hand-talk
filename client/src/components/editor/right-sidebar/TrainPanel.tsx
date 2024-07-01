@@ -10,12 +10,15 @@ const TrainPanel = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   return (
-    <div className="flex h-1/2 flex-col border-b-[1px] border-gray-300">
+    <div className="flex h-1/2 flex-col border-b-[1px] border-gray-300 dark:border-gray-800">
       <div
         className="flex items-center justify-between
-        border-b-[1px] border-gray-300 p-4"
+        border-b-[1px] border-gray-300 dark:border-gray-800 p-4"
       >
-        <div className="flex items-center space-x-2 font-semibold text-green-500">
+        <div
+          className="flex items-center space-x-2
+          font-semibold text-blue-600 dark:text-blue-400"
+        >
           <RiRobot2Fill />
           <span>Train ({selectedTrainData.length})</span>
         </div>

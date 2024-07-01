@@ -15,9 +15,10 @@ const InputPopup = (props: { onClose: () => void }) => {
     <PopupWrapper>
       <div
         className="flex flex-col justify-center
-        space-y-5 rounded-md bg-white p-4"
+        space-y-5 rounded-md border-[1px] bg-white
+        p-4 dark:border-gray-800 dark:bg-slate-950"
       >
-        <div className="text-center font-semibold text-gray-700">
+        <div className="text-center font-semibold">
           <span>New Gesture</span>
         </div>
         <input
@@ -28,14 +29,15 @@ const InputPopup = (props: { onClose: () => void }) => {
           maxLength={40}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.code == "Enter" && submitGesture()}
-          className="rounded-md border-[1px] border-gray-300 px-4 py-2
-          focus:outline-none"
+          className="rounded-md border-[1px] border-gray-300 bg-transparent px-4
+          py-2 focus:outline-none dark:border-gray-800"
         />
         <div className="grid grid-cols-2 gap-x-4">
           <button
             onClick={props.onClose}
             className="rounded-md border-[1px]
-            border-red-600 p-2 text-red-600"
+            border-red-600 p-2 text-red-600
+            dark:border-red-400 dark:text-red-400"
           >
             Cancel
           </button>
@@ -43,7 +45,8 @@ const InputPopup = (props: { onClose: () => void }) => {
             onClick={submitGesture}
             className="rounded-md border-[1px]
             border-blue-600 p-2 text-blue-800
-            disabled:border-gray-600 disabled:text-gray-600"
+            disabled:border-gray-600 disabled:text-gray-600
+            dark:border-blue-400 dark:text-blue-400"
             disabled={!input.length || gestures.includes(input)}
           >
             Add

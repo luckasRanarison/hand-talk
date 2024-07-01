@@ -8,7 +8,7 @@ type Props = {
 const SampleLabel = ({ icon: Icon, text }: Props) => (
   <div
     className="flex items-center space-x-3
-    font-semibold text-slate-700"
+    font-semibold"
   >
     <Icon size={22} />
     <span>{text}</span>

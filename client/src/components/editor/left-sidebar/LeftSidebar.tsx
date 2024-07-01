@@ -14,12 +14,12 @@ const LeftSidebar = () => {
   }, []);
 
   return (
-    <div className="flex w-1/4 flex-col border-r-[1px] border-r-gray-300">
+    <div className="flex w-1/4 flex-col border-r-[1px] border-r-gray-300 dark:border-gray-800">
       <div
         className="flex items-center justify-between
-        border-b-[1px] border-gray-300 p-4"
+        border-b-[1px] border-gray-300 p-4 dark:border-gray-800"
       >
-        <div className="flex items-center space-x-2 font-semibold text-slate-700">
+        <div className="flex items-center space-x-2 font-semibold">
           <RiDatabase2Fill />
           <span>Gestures ({gestures.length})</span>
         </div>

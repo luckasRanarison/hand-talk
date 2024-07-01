@@ -76,7 +76,7 @@ const CameraPopup = ({ type, onClose }: Props) => {
       <div
         className="relative flex flex-col
         items-center justify-center
-        overflow-hidden rounded-md bg-white"
+        overflow-hidden rounded-md"
       >
         <video
           ref={video}
