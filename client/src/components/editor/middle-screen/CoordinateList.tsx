@@ -12,8 +12,8 @@ const CoordinateList = (props: { value: number[] }) =>
         <div
           key={index}
           className="flex overflow-ellipsis rounded-md 
-            border-[1px] border-gray-300 px-4 py-3
-            text-sm font-semibold text-slate-700"
+          border-[1px] border-gray-300 px-4 py-3
+          text-sm font-semibold text-slate-700"
         >
           {value}
         </div>

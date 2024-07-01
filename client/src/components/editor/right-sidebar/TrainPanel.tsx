@@ -1,8 +1,8 @@
-import { RiRobot2Fill } from "react-icons/ri";
-import { useEditor } from "../context/EditorContext";
-import CreateButton from "./CreateButton";
-import CameraPopup from "./CameraPopup";
 import { useState } from "react";
+import { RiRobot2Fill } from "react-icons/ri";
+import { useEditor } from "@/context/editor";
+import CreateButton from "../../common/CreateButton";
+import CameraPopup from "../camera/CameraPopup";
 import DataSampleEntry from "./DataSampleEntry";
 
 const TrainPanel = () => {

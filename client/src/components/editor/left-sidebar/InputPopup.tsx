@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useEditor } from "../context/EditorContext";
-import Popup from "./Popup";
+import { useEditor } from "@/context/editor";
+import PopupWrapper from "../../common/PopupWrapper";
 
 const InputPopup = (props: { onClose: () => void }) => {
   const { createGesture, gestures } = useEditor();
@@ -12,7 +12,7 @@ const InputPopup = (props: { onClose: () => void }) => {
   };
 
   return (
-    <Popup>
+    <PopupWrapper>
       <div
         className="flex flex-col justify-center
         space-y-5 rounded-md bg-white p-4"
@@ -50,7 +50,7 @@ const InputPopup = (props: { onClose: () => void }) => {
           </button>
         </div>
       </div>
-    </Popup>
+    </PopupWrapper>
   );
 };
 

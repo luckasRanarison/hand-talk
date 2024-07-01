@@ -3,7 +3,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const Popup = ({ children, onClick }: Props) => (
+const PopupWrapper = ({ children, onClick }: Props) => (
   <div
     className="fixed inset-0 z-50 flex
     h-screen w-screen items-center justify-center
@@ -14,4 +14,4 @@ const Popup = ({ children, onClick }: Props) => (
   </div>
 );
 
-export default Popup;
+export default PopupWrapper;

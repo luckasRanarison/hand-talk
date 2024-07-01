@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { RiTestTubeFill } from "react-icons/ri";
-import { useEditor } from "../context/EditorContext";
-import CreateButton from "./CreateButton";
-import CameraPopup from "./CameraPopup";
+import { useEditor } from "@/context/editor";
+import CreateButton from "../../common/CreateButton";
+import CameraPopup from "../camera/CameraPopup";
 import DataSampleEntry from "./DataSampleEntry";
 
 const TestPanel = () => {

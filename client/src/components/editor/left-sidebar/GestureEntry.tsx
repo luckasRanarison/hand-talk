@@ -1,5 +1,5 @@
-import { useEditor } from "../context/EditorContext";
-import DeleteButton from "./DeleteButton";
+import { useEditor } from "@/context/editor";
+import DeleteButton from "../../common/DeleteButton";
 
 const GestureEntry = (props: { name: string }) => {
   const { selectedGesture, deleteGesture, setSelectedGesture } = useEditor();

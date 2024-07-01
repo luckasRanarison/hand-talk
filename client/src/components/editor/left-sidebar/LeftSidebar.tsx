@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useEditor } from "../context/EditorContext";
 import { RiDatabase2Fill } from "react-icons/ri";
+import { useEditor } from "@/context/editor";
+import CreateButton from "@/components/common/CreateButton";
 import GestureEntry from "./GestureEntry";
 import InputPopup from "./InputPopup";
-import CreateButton from "./CreateButton";
 
 const LeftSidebar = () => {
   const { gestures, fetchGestures } = useEditor();

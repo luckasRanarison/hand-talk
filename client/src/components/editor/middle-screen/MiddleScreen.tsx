@@ -1,7 +1,7 @@
 import { RiHand, RiImageFill, RiStackFill, RiUserLine } from "react-icons/ri";
-import { useEditor } from "../context/EditorContext";
+import { useEditor } from "@/context/editor";
 import CoordinateList from "./CoordinateList";
-import SampleLabel from "./SampleLabel";
+import SampleLabel from "../right-sidebar/SampleLabel";
 import { useState } from "react";
 import ImagePopup from "./ImagePopup";
 
@@ -35,8 +35,8 @@ const MiddleScreen = () => {
           className="flex h-full flex-col items-center
           justify-center space-y-4"
         >
-          <RiStackFill className="text-gray-600" size={50} />
-          <div className="text-xl text-gray-600">No sample selected</div>
+          <RiStackFill className="text-slate-700" size={50} />
+          <div className="text-xl text-slate-700">No sample selected</div>
         </div>
       )}
     </div>

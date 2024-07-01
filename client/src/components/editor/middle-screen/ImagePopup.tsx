@@ -1,12 +1,12 @@
-import config from "../config";
-import { useEditor } from "../context/EditorContext";
-import Popup from "./Popup";
+import config from "@/config";
+import { useEditor } from "@/context/editor";
+import PopupWrapper from "../../common/PopupWrapper";
 
 const ImagePopup = (props: { onClose: () => void }) => {
   const { selectedGesture, selectedSample } = useEditor();
 
   return (
-    <Popup onClick={props.onClose}>
+    <PopupWrapper onClick={props.onClose}>
       <img
         src={`${config.serverUrl}/api/images/${selectedGesture}/${
           selectedSample!.type
@@ -14,7 +14,7 @@ const ImagePopup = (props: { onClose: () => void }) => {
         alt="sample image"
         className="rounded-md"
       />
-    </Popup>
+    </PopupWrapper>
   );
 };
 

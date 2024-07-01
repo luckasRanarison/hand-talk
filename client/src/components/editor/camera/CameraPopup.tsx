@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Popup from "./Popup";
-import { useEditor } from "../context/EditorContext";
+import { useEditor } from "@/context/editor";
+import PopupWrapper from "../../common/PopupWrapper";
 import CameraControls from "./CameraControls";
-import type { SampleType } from "../types";
+import type { SampleType } from "@/types";
 
 type Props = {
   type: SampleType;
@@ -72,7 +72,7 @@ const CameraPopup = ({ type, onClose }: Props) => {
   }, [countdown, intervalId]);
 
   return (
-    <Popup>
+    <PopupWrapper>
       <div
         className="relative flex flex-col
         items-center justify-center
@@ -106,7 +106,7 @@ const CameraPopup = ({ type, onClose }: Props) => {
           />
         )}
       </div>
-    </Popup>
+    </PopupWrapper>
   );
 };
 

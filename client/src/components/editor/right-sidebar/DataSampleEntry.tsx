@@ -1,6 +1,6 @@
-import { useEditor } from "../context/EditorContext";
-import DeleteButton from "./DeleteButton";
-import type { SampleType } from "../types";
+import { useEditor } from "@/context/editor";
+import type { SampleType } from "@/types";
+import DeleteButton from "../../common/DeleteButton";
 
 type Props = {
   id: string;
@@ -12,7 +12,7 @@ const DataSampleEntry = ({ id, type }: Props) => {
 
   const toggleSelection = () => {
     if (selectedSample?.id == id) {
-      setSelectedSample(undefined);
+      setSelectedSample();
     } else {
       setSelectedSample({ id, type });
     }
