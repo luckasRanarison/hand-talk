@@ -8,7 +8,7 @@ from utils.fs import DB_PATH, MODELS_PATH
 TF_EPOCH_RE = re.compile(r"Epoch (?P<epoch>\d+)")
 
 TF_PROGRESS_RE = re.compile(
-    r"(?P<batch>\d+)/\d+ ━━━━━━━━━━━━━━━━━━━━ (?P<duration>\d+[^\s]+) (?P<step>\d+(s|ms))/step - accuracy: (?P<accuracy>\d+\.\d+) - loss: (?P<loss>\d+\.\d+)"
+    r"(?P<batch>\d+)/\d+ ━+ (?P<duration>\d+[^\s]+) (?P<step>\d+[^/]+)/step - accuracy: (?P<accuracy>\d+\.\d+) - loss: (?P<loss>\d+\.\d+)"
 )
 
 
