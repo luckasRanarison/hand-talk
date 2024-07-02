@@ -1,7 +1,7 @@
 import os
 
-from fastapi import APIRouter, WebSocket
-from utils.fs import MODELS_PATH
+from fastapi import APIRouter, HTTPException, WebSocket
+from utils.fs import MODELS_PATH, get_model_path, extract_model_headers
 from utils.tf import parse_status, spawn_trainer
 
 
@@ -20,7 +20,7 @@ async def get():
 
 @router.delete("/{model}")
 async def delete(model: str):
-    model_path = os.path.join(MODELS_PATH, model + ".keras")
+    model_path = get_model_path(model)
 
     if os.path.exists(model_path):
         os.remove(model_path)
@@ -47,3 +47,13 @@ async def create(ws: WebSocket):
             await ws.send_json(status)
 
     await ws.close()
+
+
+@router.get("/data/{model}")
+def get_data(model: str):
+    model_path = get_model_path(model)
+
+    if not os.path.exists(model_path):
+        raise HTTPException(404, "Model not found")
+
+    return extract_model_headers(model_path)

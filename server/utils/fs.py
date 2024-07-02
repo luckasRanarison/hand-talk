@@ -1,6 +1,7 @@
 import os
-import aiofiles as aio
 import json
+import zipfile
+import aiofiles as aio
 
 from typing import Any
 from uuid import UUID
@@ -33,3 +34,22 @@ async def persist_data(
 
     async with aio.open(img_path, "wb") as f:
         await f.write(image)
+
+
+def get_model_path(model: str):
+    return os.path.join(MODELS_PATH, model + ".keras")
+
+
+def extract_model_headers(model_path: str):
+    headers = {}
+
+    with zipfile.ZipFile(model_path, "r") as zip_ref:
+        with zip_ref.open("metadata.json") as metadata_file:
+            metadata_content = metadata_file.read()
+            headers["metadata"] = json.loads(metadata_content)
+
+        with zip_ref.open("config.json") as config_file:
+            config_content = config_file.read()
+            headers["config"] = json.loads(config_content)
+
+    return headers
