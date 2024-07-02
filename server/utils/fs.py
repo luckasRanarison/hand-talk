@@ -7,6 +7,7 @@ from uuid import UUID
 
 
 DB_PATH = os.getenv("DB_PATH") or "db"
+MODELS_PATH = os.getenv("MODELS_PATH") or "models"
 
 
 def get_data_dirs(name: str):
