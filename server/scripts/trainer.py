@@ -73,9 +73,9 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument("--name", help="The name of the model", required=True)
 parser.add_argument("--epochs", help="The number of epochs", required=True, type=int)
+parser.add_argument("--batch", help="The batch size", type=int)
 parser.add_argument("--optimizer", help="The optimizer type", required=True)
 parser.add_argument("--loss", help="The loss function", required=True)
-parser.add_argument("--batch", help="The batch size")
 parser.add_argument("--db", help="The database path", required=True)
 parser.add_argument("--outdir", help="The destination directory", required=True)
 

@@ -1,15 +1,7 @@
-import re
 import subprocess
 
-from utils.regex import strip_ansi
+from utils.regex import strip_ansi, TF_EPOCH_RE, TF_PROGRESS_RE
 from utils.fs import DB_PATH, MODELS_PATH
-
-
-TF_EPOCH_RE = re.compile(r"Epoch (?P<epoch>\d+)")
-
-TF_PROGRESS_RE = re.compile(
-    r"(?P<batch>\d+)/\d+ ━+ (?P<duration>\d+[^\s]+) (?P<step>\d+[^/]+)/step - accuracy: (?P<accuracy>\d+\.\d+) - loss: (?P<loss>\d+\.\d+)"
-)
 
 
 def spawn_trainer(params: dict[str, str]):
@@ -20,7 +12,9 @@ def spawn_trainer(params: dict[str, str]):
             "--name",
             params["name"],
             "--epochs",
-            params["epochs"],
+            str(params["epochs"]),  # args must be strings
+            "--batch",
+            str(params["batch"]),
             "--optimizer",
             params["optimizer"],
             "--loss",
@@ -42,16 +36,19 @@ def parse_status(line: str):
 
     if match:
         epoch = int(match.group("epoch"))
+        total = int(match.group("total"))
 
         return {
             "status": "epoch",
             "current": epoch,
+            "total": total,
         }
 
     match = TF_PROGRESS_RE.search(line)
 
     if match:
         batch = int(match.group("batch"))
+        total = int(match.group("total"))
         duration = match.group("duration")
         step = match.group("step")
         accuracy = float(match.group("accuracy"))
@@ -60,6 +57,7 @@ def parse_status(line: str):
         return {
             "status": "batch",
             "current": batch,
+            "total": total,
             "duration": duration,
             "step": step,
             "accuracy": accuracy,
