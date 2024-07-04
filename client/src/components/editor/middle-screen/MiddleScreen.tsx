@@ -1,9 +1,5 @@
-import { RiHand, RiImageFill, RiStackFill, RiUserLine } from "react-icons/ri";
+import { RiStackFill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
-import CoordinateList from "./CoordinateList";
-import SampleLabel from "./SampleLabel";
-import { useState } from "react";
-import ImagePopup from "./ImagePopup";
 import SampleData from "./SampleData";
 
 const MiddleScreen = () => {

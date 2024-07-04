@@ -1,8 +1,8 @@
 import { useTheme } from "@/context/theme";
-import { RiContrastFill, RiMoonLine, RiQuestionLine } from "react-icons/ri";
+import { RiContrastFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 
-const routes = ["/", "/editor", "/trainer", "/detector"];
+const routes = ["/", "/editor", "/models"];
 
 const Navbar = () => {
   const { pathname } = useLocation();

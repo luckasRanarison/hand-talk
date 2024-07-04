@@ -46,6 +46,20 @@ function deleteGestureData(name: string, type: SampleType, id: string) {
   return client.delete(`/data/${name}/${type}/${id}`);
 }
 
+async function getModels(): Promise<string[]> {
+  const res = await client.get("/models");
+  return res.data;
+}
+
+async function getModelInfo(name: string) {
+  const res = await client.get(`/models/data/${name}`);
+  return res.data;
+}
+
+function deleteModel(name: string) {
+  return client.delete(`/models/${name}`);
+}
+
 async function submitImage(
   image: Blob,
   lablel: string,
@@ -63,11 +77,14 @@ async function submitImage(
 
 export default {
   getGestures,
+  getGestureData,
   getSampleData,
+  getModels,
+  getModelInfo,
   createGesture,
   deleteGesture,
-  renameGesture,
-  getGestureData,
-  submitImage,
   deleteGestureData,
+  deleteModel,
+  renameGesture,
+  submitImage,
 };

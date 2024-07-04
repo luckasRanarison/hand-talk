@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RiDatabase2Fill } from "react-icons/ri";
 import { useEditor } from "@/context/editor";
 import CreateButton from "@/components/common/CreateButton";
@@ -6,18 +6,10 @@ import InputPopup from "./InputPopup";
 import SelectableEntry from "@/components/common/SelectableEntry";
 
 const LeftSidebar = () => {
-  const {
-    gestures,
-    selectedGesture,
-    fetchGestures,
-    setSelectedGesture,
-    deleteGesture,
-  } = useEditor();
-  const [showInput, setShowInput] = useState(false);
+  const { gestures, selectedGesture, setSelectedGesture, deleteGesture } =
+    useEditor();
 
-  useEffect(() => {
-    fetchGestures();
-  }, []);
+  const [showInput, setShowInput] = useState(false);
 
   return (
     <div className="flex w-1/4 flex-col border-r-[1px] border-r-gray-300 dark:border-gray-800">
