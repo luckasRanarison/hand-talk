@@ -53,7 +53,9 @@ def parse_status(line: str):
         duration = batch_match.group("duration")
         step = batch_match.group("step")
         accuracy = float(batch_match.group("accuracy"))
-        loss = float(batch_match.group("loss"))
+        loss = batch_match.group("loss")
+        loss = loss + "0" if loss.endswith("e") else loss  # Avoid parsing error
+        loss = float(loss)
 
         status["batch"] = {
             "current": batch,
