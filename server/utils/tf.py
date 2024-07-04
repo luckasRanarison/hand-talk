@@ -1,61 +1,61 @@
-import subprocess
+import asyncio
 
-from utils.regex import strip_ansi, TF_EPOCH_RE, TF_PROGRESS_RE
+from utils.regex import TF_EPOCH_RE, TF_PROGRESS_RE
 from utils.fs import DB_PATH, MODELS_PATH
 
 
 def spawn_trainer(params: dict[str, str]):
-    return subprocess.Popen(
-        [
-            "python",
-            "./scripts/trainer.py",
-            "--name",
-            params["name"],
-            "--epochs",
-            str(params["epochs"]),  # args must be strings
-            "--batch",
-            str(params["batch"]),
-            "--optimizer",
-            params["optimizer"],
-            "--loss",
-            params["loss"],
-            "--db",
-            DB_PATH,
-            "--outdir",
-            MODELS_PATH,
-        ],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
+    args = [
+        "./scripts/trainer.py",
+        "--name",
+        params["name"],
+        "--epochs",
+        str(params["epochs"]),  # args must be strings
+        "--batch",
+        str(params["batch"]),
+        "--optimizer",
+        params["optimizer"],
+        "--loss",
+        params["loss"],
+        "--db",
+        DB_PATH,
+        "--outdir",
+        MODELS_PATH,
+    ]
+
+    return asyncio.create_subprocess_exec(
+        "python",
+        *args,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
     )
 
 
 def parse_status(line: str):
-    line = strip_ansi(line)
-    match = TF_EPOCH_RE.search(line)
+    status = {}
 
-    if match:
-        epoch = int(match.group("epoch"))
-        total = int(match.group("total"))
+    epoch_match = TF_EPOCH_RE.search(line)
 
-        return {
-            "status": "epoch",
+    if epoch_match:
+        epoch = int(epoch_match.group("epoch"))
+        total = int(epoch_match.group("total"))
+
+        status["epoch"] = {
             "current": epoch,
             "total": total,
         }
 
-    match = TF_PROGRESS_RE.search(line)
+    batch_match = TF_PROGRESS_RE.search(line)
 
-    if match:
-        batch = int(match.group("batch"))
-        total = int(match.group("total"))
-        duration = match.group("duration")
-        step = match.group("step")
-        accuracy = float(match.group("accuracy"))
-        loss = float(match.group("loss"))
+    if batch_match:
+        batch = int(batch_match.group("batch"))
+        total = int(batch_match.group("total"))
+        duration = batch_match.group("duration")
+        step = batch_match.group("step")
+        accuracy = float(batch_match.group("accuracy"))
+        loss = float(batch_match.group("loss"))
 
-        return {
-            "status": "batch",
+        status["batch"] = {
             "current": batch,
             "total": total,
             "duration": duration,
@@ -63,3 +63,5 @@ def parse_status(line: str):
             "accuracy": accuracy,
             "loss": loss,
         }
+
+    return status

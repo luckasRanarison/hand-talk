@@ -1,7 +1,8 @@
 import os
 
-from fastapi import APIRouter, HTTPException, WebSocket
+from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from utils.fs import MODELS_PATH, get_model_path, extract_model_headers
+from utils.regex import strip_ansi
 from utils.tf import parse_status, spawn_trainer
 
 
@@ -26,29 +27,6 @@ async def delete(model: str):
         os.remove(model_path)
 
 
-@router.websocket("/create")
-async def create(ws: WebSocket):
-    await ws.accept()
-
-    params = await ws.receive_json()
-    process = spawn_trainer(params)
-
-    while True:
-        line = ""
-
-        if process.stdout:
-            line = process.stdout.readline()
-        if line == "" and process.poll() is not None:
-            break
-
-        status = parse_status(line)
-
-        if status is not None:
-            await ws.send_json(status)
-
-    await ws.close()
-
-
 @router.get("/data/{model}")
 def get_data(model: str):
     model_path = get_model_path(model)
@@ -57,3 +35,30 @@ def get_data(model: str):
         raise HTTPException(404, "Model not found")
 
     return extract_model_headers(model_path)
+
+
+@router.websocket("/create")
+async def create(ws: WebSocket):
+    await ws.accept()
+
+    params = await ws.receive_json()
+    process = await spawn_trainer(params)
+
+    try:
+        while True:
+            line = ""
+
+            if process.stdout:
+                line_bytes = await process.stdout.readline()
+                line = line_bytes.decode()
+                line = strip_ansi(line)
+
+            if line == "":
+                break
+
+            status = parse_status(line)
+            await ws.send_json(status)
+
+        await ws.close()
+    except WebSocketDisconnect:
+        process.terminate()
