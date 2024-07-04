@@ -1,5 +1,6 @@
 import os
 import json
+import zipfile
 import argparse
 import numpy as np
 
@@ -65,6 +66,11 @@ def train_model(data, name, epochs, optimizer, loss, dst_path, batch=None):
     file_path = os.path.join(dst_path, f"{name}.keras")
 
     model.save(file_path)
+
+    labels = list(data.keys())
+
+    with zipfile.ZipFile(file_path, "a") as zip_ref:
+        zip_ref.writestr("labels.json", json.dumps(labels))
 
 
 parser = argparse.ArgumentParser(

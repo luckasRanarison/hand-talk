@@ -52,4 +52,8 @@ def extract_model_headers(model_path: str):
             config_content = config_file.read()
             headers["config"] = json.loads(config_content)
 
+        with zip_ref.open("labels.json") as labels_file:
+            labels_content = labels_file.read()
+            headers["labels"] = json.loads(labels_content)
+
     return headers

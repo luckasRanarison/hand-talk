@@ -29,6 +29,11 @@ const ModelMetadata = ({ data }: Record<string, any>) => (
       label="Loss"
       value={data.config.compile_config.loss}
     />
+    <LabeledInfo
+      icon={RiListCheck}
+      label="Labels"
+      value={data.labels.join(", ")}
+    />
   </div>
 );
 
