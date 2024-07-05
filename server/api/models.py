@@ -1,9 +1,13 @@
 import os
+import cv2
+import numpy as np
 
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from utils.fs import MODELS_PATH, get_model_path, extract_model_headers
+from utils.models import load_model
 from utils.regex import strip_ansi
 from utils.tf import parse_status, spawn_trainer
+from lib import holistic
 
 
 router = APIRouter()
@@ -62,3 +66,26 @@ async def create(ws: WebSocket):
         await ws.close()
     except WebSocketDisconnect:
         process.terminate()
+
+
+@router.websocket("/predict/{name}")
+async def predict(ws: WebSocket, name: str):
+    await ws.accept()
+
+    model, labels = load_model(name)
+
+    try:
+        while True:
+            image_bytes = await ws.receive_bytes()
+            image_np = np.frombuffer(image_bytes, np.uint8)
+            image_decoded = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+            results = holistic.process(image_decoded)
+            normalized = results["pose"] + results["left_hand"] + results["right_hand"]
+            input = np.array([normalized])
+            predictions = model.predict(input)
+            guess = np.argmax(predictions)
+            label = labels[guess]
+
+            await ws.send_text(label)
+    except WebSocketDisconnect:
+        pass

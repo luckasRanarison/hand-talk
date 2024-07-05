@@ -2,18 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useEditor } from "@/context/editor";
 import PopupWrapper from "../../common/PopupWrapper";
 import CameraControls from "./CameraControls";
+import { createCanvas } from "@/utils";
 import type { SampleType } from "@/types";
 
 type Props = {
   type: SampleType;
   onClose: () => void;
-};
-
-const createCanvas = () => {
-  const canvas = document.createElement("canvas");
-  canvas.width = 640;
-  canvas.height = 480;
-  return canvas;
 };
 
 const CameraPopup = ({ type, onClose }: Props) => {
