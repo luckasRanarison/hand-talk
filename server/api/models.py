@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.get("/")
-async def get():
+def get():
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
 
@@ -24,7 +24,7 @@ async def get():
 
 
 @router.delete("/{model}")
-async def delete(model: str):
+def delete(model: str):
     model_path = get_model_path(model)
 
     if os.path.exists(model_path):
@@ -70,9 +70,9 @@ async def create(ws: WebSocket):
 
 @router.websocket("/predict/{name}")
 async def predict(ws: WebSocket, name: str):
-    await ws.accept()
-
     model, labels = load_model(name)
+
+    await ws.accept()
 
     try:
         while True:
